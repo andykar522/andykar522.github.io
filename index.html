@@ -2,82 +2,39 @@
 <html>
 <body>
 
-<button onclick="drawNextScene()">Click Here to Move Forward</button>
+<h2> Why does this Dumb Bear keep running into the Wall? </h2>
 
-<canvas id="myCanvas" width="400" height="480" style="border:1px solid #d3d3d3; background-color:cyan;">
+<canvas id="myCanvas" width="400" height="400" style="border:1px solid #d3d3d3; background-color:cyan;">
 Your browser does not support the HTML5 canvas tag.</canvas>
-  
-  
+
 <script>
 
-var sceneCounter = 0;
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
+pos = 0;
+drawTubbs(75,200);
+setInterval(updateBear, 12);
 
-function drawNextScene(){
-    sceneCounter++;
-    
-    if(sceneCounter == 1) {
-        drawScene1();
-    } else if (sceneCounter == 2) {
-        drawScene2();
-    }else if (sceneCounter == 3) {
-        drawScene3();
-    } else if (sceneCounter == 4) {
-        drawScene4();
-    } else {
-        drawScene5();
-    } 
+function updateBear()
+{
+		ctx.beginPath();
+		ctx.clearRect(0,0,400,400);
+		pos++;
+		drawTubbs(75 + pos, 200);		
+	if(pos >= 280 && pos <= 290)
+	{	
+		ctx.beginPath();
+		ctx.font = "50px Arial";
+		ctx.fillStyle = "black";
+		ctx.fillText("OW!", 250,100);	
+	}
+	if(pos == 290)
+	{
+		pos=0;
+	}	
 }
 
-
-function drawScene1()
-	{
-		drawBackground();
-		drawTubbs(80,300,30,75, Math.PI/6);
-		drawText("30px Arial", "black", "Tubbs ... Brave Bear", 60,80);
-	}
-	
-function drawScene2()
-	{
-		drawBackground();
-		drawTubbs(100,300,30,75,Math.PI/6);
-		drawText("80px Times New Roman", "red", "BOOM!", 30, 180);
-	}
-	
-function drawScene3()
-	{
-		drawBackground();
-		drawTubbs(80,100,28,45,0.9 * Math.PI);
-		drawLine(50,280,50,400);
-		drawLine(100,280,100,340);
-		drawLine(150,280,150,400);
-	}
-	
-function drawScene4()
-	{
-		drawBackground();
-		drawTubbs(80,300,30,75,Math.PI/6);
-		drawText( "20px Arial", "black", "Mother!", 150, 280);
-	}
-	
-function drawScene5()
-	{
-		drawBackground();
-		drawTubbs(320,300,30,75,Math.PI/6);
-		drawLine(120,300,240,300);
-		drawLine(180,350,240,350);
-		drawLine(120,400,240,400);
-		drawText("30px Arial", "black", "Well, not so much!", 60,80);
-	}
-    
-function drawBackground()
-	{
-		drawRect(0,0,400,480, "cyan");
-		drawRect(0,450,400,30, "#00FF00");
-	}
-
-function drawTubbs(x,y,a1,a2,rotate)
+function drawTubbs(x,y)
 	{
 	drawCircle(x ,y ,40, "white"); // head
 	drawCircle(x+5 ,y+90 ,60, "white"); // body
@@ -88,7 +45,7 @@ function drawTubbs(x,y,a1,a2,rotate)
 	drawCircle(x+63 ,y+140 ,20, "white"); // foot
 	drawOval(x+44,y,6, 9, 0, "black"); // nose
 	drawRect(x-30, y+ 128, 90, 30, "white"); // leg
-	drawOval(x+a1, y+a2, 53, 18, rotate, "#F7F9F9") //arm
+	drawOval(x+30, y+75, 53, 18, Math.PI/6, "#F7F9F9") //arm
 	}
 
 function drawCircle(x,y,r,color)
@@ -117,31 +74,9 @@ function drawOval(x,y,hrad,vrad,rotate,color)
 		ctx.fill();
 	}
 	
-function drawText(print,color,text,x,y)
-	{
-		ctx.beginPath();
-		ctx.font = print;
-		ctx.fillStyle = color;
-		ctx.fillText(text, x, y);
-	}
-	
-function drawLine(x0, y0, x1, y1)
-	{
-		ctx.beginPath();
-		ctx.moveTo(x0, y0);
-		ctx.lineTo(x1, y1);
-		ctx.strokeStyle = "black";
-		ctx.stroke();
-	}
-
-	
 	
 
 </script> 
-
-
-
-
 
 </body>
 </html>
