@@ -2,42 +2,36 @@
 <html>
 <body>
 
-<button onclick="start()">Click here to begin</button>
 
-<canvas id="myCanvas" width="800" height="400" style="border:1px solid #d3d3d3; background-color:cyan;">
+
+<canvas id="myCanvas" width="500" height="400" style="border:1px solid #d3d3d3; background-color:cyan;">
 Your browser does not support the HTML5 canvas tag.</canvas>
 
 <script>
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
-    
-pos = 0;
-drawTubbs(75,200);
 
-var img = new Image();
-    img.src = "Karen1.jpg";
+drawFrontTubbs(250,270);
+drawText("45px Arial Black", "black", "I pleaded with you!", 10,90);
     
-    img.onload = function()
-    	{
-        ctx.drawImage(img,370, 80, 100, 100, 10, 10, 100, 100);
-        }
-        
-function start()
-{        
-setInterval(updateBear, 10);
- drawText();
- }
-
-function updateBear()
+function drawFrontTubbs(x,y)
 {
+drawArc(x, y+150,220,100,0, "white",1.6*Math.PI, 1.4*Math.PI);  // body
+drawCircle1(x, y,120,"white");       // head
+drawOval1(x, y+30, 55, 50, 0, "white");  //snout
+drawCircle1(x, y+25,20,"black");        //nose
+drawCircle1(x-45, y-35,8,"black");        // eye
+drawCircle1(x+45, y-35,8,"black");        // eye
+drawArc(x-80,y-89,40,40,0, "white",0.72*Math.PI, 1.81*Math.PI);  // ear
+drawArc(x+80, y-89,40,40,0, "white",1.19*Math.PI, 0.28*Math.PI);  // ear
 
-		ctx.beginPath();
-		ctx.clearRect(0,120,800,380);
-		pos+=2;
-		drawTubbs(75 + pos, 200);		
-		
+
 }
+
+
+   
+
 
 function drawTubbs(x,y)
 	{
@@ -53,13 +47,14 @@ function drawTubbs(x,y)
 	drawOval(x+30, y+75, 53, 18, Math.PI/6, "#F7F9F9") //arm
 	}
 
-function drawCircle(x,y,r,color)
+function drawCircle1(x,y,r,color)
 {
 	
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0, 2 * Math.PI);
 	ctx.fillStyle = color;
 	ctx.fill();
+	ctx.stroke();
 	
 }
 
@@ -71,22 +66,40 @@ function drawRect(x,y,width,height,color)
 		ctx.fill();
 	}
 	
-function drawOval(x,y,hrad,vrad,rotate,color)
+function drawOval1(x,y,hrad,vrad,rotate,color)
 	{
 		ctx.beginPath();
 		ctx.ellipse(x,y,hrad,vrad,rotate,0,2*Math.PI);
 		ctx.fillStyle = color;
 		ctx.fill();
+		ctx.stroke();
 	}
 	
-function drawText()
+	function drawArc(x,y,hrad,vrad,rotate,color,sangle,eangle)
 	{
 		ctx.beginPath();
-		ctx.font = "50px Arial";
-		ctx.fillStyle = "black";
-		ctx.fillText("Dinner!", 150, 80);
+		ctx.ellipse(x,y,hrad,vrad,rotate,sangle,eangle);
+		ctx.fillStyle = color;
+		ctx.fill();
+		ctx.stroke();
 	}
-
+	
+function drawText(print,color,text,x,y)
+	{
+		ctx.beginPath();
+		ctx.font = print;
+		ctx.fillStyle = color;
+		ctx.fillText(text, x, y);
+	}
+	
+function drawLine(x0, y0, x1, y1)
+	{
+		ctx.beginPath();
+		ctx.moveTo(x0, y0);
+		ctx.lineTo(x1, y1);
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+	}
 	
 	
 
