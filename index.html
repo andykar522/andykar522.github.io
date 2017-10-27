@@ -2,37 +2,124 @@
 <html>
 <body>
 
-
+<button onclick="drawNextScene()">Click Here to Move Forward</button>
 
 <canvas id="myCanvas" width="500" height="400" style="border:1px solid #d3d3d3; background-color:cyan;">
 Your browser does not support the HTML5 canvas tag.</canvas>
 
 <script>
 
+var sceneCounter = 0;
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
-drawFrontTubbs(250,270);
-drawText("45px Arial Black", "black", "I pleaded with you!", 10,90);
+function drawNextScene(){
+    sceneCounter++;
     
-function drawFrontTubbs(x,y)
-{
-drawArc(x, y+150,220,100,0, "white",1.6*Math.PI, 1.4*Math.PI);  // body
-drawCircle1(x, y,120,"white");       // head
-drawOval1(x, y+30, 55, 50, 0, "white");  //snout
-drawCircle1(x, y+25,20,"black");        //nose
-drawCircle1(x-45, y-35,8,"black");        // eye
-drawCircle1(x+45, y-35,8,"black");        // eye
-drawArc(x-80,y-89,40,40,0, "white",0.72*Math.PI, 1.81*Math.PI);  // ear
-drawArc(x+80, y-89,40,40,0, "white",1.19*Math.PI, 0.28*Math.PI);  // ear
-
-
+    if(sceneCounter == 1) {
+        drawScene1();
+    } else if (sceneCounter == 2) {
+        drawScene2();
+    }else if (sceneCounter == 3) {
+        drawScene3();
+    } else if (sceneCounter == 4) {
+        drawScene4();
+    } else {
+        drawScene5();
+    } 
 }
 
 
-   
+function drawScene1()
+	{
+	
+	drawTubbs(130,200);
 
+var img = new Image();
+    img.src = "bear1.jpg";
+    
+    img.onload = function()
+    	{
+        ctx.drawImage(img, 300,180);
+        }
+        
+drawText("30px Arial", "black", "That's one", 90,50);
+drawText("30px Arial", "black", "good looking Bear!", 50, 80);
+drawLine(145,140,180,95); 
+		
+		
+	}
+	
+function drawScene2()
+	{
+	
+	drawBackground();
+	drawTubbs(130,200);
 
+var img = new Image();
+    img.src = "bear1.jpg";
+    
+    img.onload = function()
+    	{
+        ctx.drawImage(img, 300,180);
+        }
+        
+	drawText("30px Arial", "black", "A bit Pudgy, eh?", 250, 80);
+	drawLine(400,100,470,140);
+		
+		
+	}
+	
+function drawScene3()
+	{
+	drawBackground();
+	drawFrontTubbs(250,270);
+drawText("80px Arial Black", "black", "BOY!", 150,80);
+		
+		
+	}
+	
+function drawScene4()
+	{
+	drawBackground();
+	drawFrontTubbs(250,270);
+	drawOval1(150,380,100,200,Math.PI/6,"white");
+drawText("45px Arial Black", "black", "Do You Want the ",40, 70);
+drawText("45px Arial Black", "black", "Back of my PAW! ",40, 120);
+		
+		
+	}
+	
+function drawScene5()
+	{
+	
+	drawBackground();
+	drawTubbs(130,200);
+
+var img = new Image();
+    img.src = "bear1.jpg";
+    
+    img.onload = function()
+    	{
+        ctx.drawImage(img, 300,180);
+        }
+        
+ drawLine(130,130,130,80);
+ drawLine(110,130,100,90);
+ drawLine(150,130,160,90);
+ 
+ drawLine1(108,215,108,175);
+ drawLine1(120,230,120,170);
+ drawLine1(135,230,135,170);
+ drawLine1(155,225,155,175);
+ 
+ drawText("30px Arial", "black", "Gulp, ",350, 40);
+ drawText("30px Arial", "black", "a tad touchy! ",300, 80);
+ drawLine(400,100,470,140);
+		
+		
+	}
+    
 function drawTubbs(x,y)
 	{
 	drawCircle(x ,y ,40, "white"); // head
@@ -46,15 +133,28 @@ function drawTubbs(x,y)
 	drawRect(x-30, y+ 128, 90, 30, "white"); // leg
 	drawOval(x+30, y+75, 53, 18, Math.PI/6, "#F7F9F9") //arm
 	}
+	
+	function drawFrontTubbs(x,y)
+{
+drawArc(x, y+150,220,100,0, "white",1.6*Math.PI, 1.4*Math.PI);  // body
+drawCircle1(x, y,120,"white");       // head
+drawOval1(x, y+30, 55, 50, 0, "white");  //snout
+drawCircle1(x, y+25,20,"black");        //nose
+drawCircle1(x-45, y-35,8,"black");        // eye
+drawCircle1(x+45, y-35,8,"black");        // eye
+drawArc(x-80,y-89,40,40,0, "white",0.72*Math.PI, 1.81*Math.PI);  // ear
+drawArc(x+80, y-89,40,40,0, "white",1.19*Math.PI, 0.28*Math.PI);  // ear
 
-function drawCircle1(x,y,r,color)
+
+}
+
+function drawCircle(x,y,r,color)
 {
 	
 	ctx.beginPath();
 	ctx.arc(x, y, r, 0, 2 * Math.PI);
 	ctx.fillStyle = color;
 	ctx.fill();
-	ctx.stroke();
 	
 }
 
@@ -66,22 +166,12 @@ function drawRect(x,y,width,height,color)
 		ctx.fill();
 	}
 	
-function drawOval1(x,y,hrad,vrad,rotate,color)
+function drawOval(x,y,hrad,vrad,rotate,color)
 	{
 		ctx.beginPath();
 		ctx.ellipse(x,y,hrad,vrad,rotate,0,2*Math.PI);
 		ctx.fillStyle = color;
 		ctx.fill();
-		ctx.stroke();
-	}
-	
-function drawArc(x,y,hrad,vrad,rotate,color,sangle,eangle)
-	{
-		ctx.beginPath();
-		ctx.ellipse(x,y,hrad,vrad,rotate,sangle,eangle);
-		ctx.fillStyle = color;
-		ctx.fill();
-		ctx.stroke();
 	}
 	
 function drawText(print,color,text,x,y)
@@ -92,7 +182,16 @@ function drawText(print,color,text,x,y)
 		ctx.fillText(text, x, y);
 	}
 	
-function drawLine(x0, y0, x1, y1)
+function drawLine1(x0, y0, x1, y1)
+	{
+		ctx.beginPath();
+		ctx.moveTo(x0, y0);
+		ctx.lineTo(x1, y1);
+		ctx.strokeStyle = "red";
+		ctx.stroke();
+	}
+	
+	function drawLine(x0, y0, x1, y1)
 	{
 		ctx.beginPath();
 		ctx.moveTo(x0, y0);
@@ -100,6 +199,43 @@ function drawLine(x0, y0, x1, y1)
 		ctx.strokeStyle = "black";
 		ctx.stroke();
 	}
+	
+	
+function drawBackground()
+	{
+		drawRect(0,0,500,400,"cyan");
+	}
+	
+	function drawOval1(x,y,hrad,vrad,rotate,color)
+	{
+		ctx.beginPath();
+		ctx.ellipse(x,y,hrad,vrad,rotate,0,2*Math.PI);
+		ctx.fillStyle = color;
+		ctx.fill();
+		ctx.stroke();
+	}
+	
+	function drawArc(x,y,hrad,vrad,rotate,color,sangle,eangle)
+	{
+		ctx.beginPath();
+		ctx.ellipse(x,y,hrad,vrad,rotate,sangle,eangle);
+		ctx.fillStyle = color;
+		ctx.fill();
+		ctx.stroke();
+	}
+	
+	function drawCircle1(x,y,r,color)
+{
+	
+	ctx.beginPath();
+	ctx.arc(x, y, r, 0, 2 * Math.PI);
+	ctx.fillStyle = color;
+	ctx.fill();
+	ctx.stroke();
+	
+}
+
+
 	
 	
 
